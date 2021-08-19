@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import './style.css';
 
 
 class ListElement {
@@ -32,4 +33,5 @@ class ListElement {
    return ul;
  }
 
-document.body.appendChild(list());
+const listContainer = document.getElementById('todoList');
+listContainer.appendChild(list());
