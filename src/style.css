@@ -4,36 +4,32 @@ ul {
   margin: 0;
 }
 
-.container{
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.listElement{
-  padding: 10px;
-}
-
-.title{
+.title {
   margin: 50px;
 }
 
-.listElement{
+.listElement {
   display: flex;
   justify-content: space-between;
-  border-bottom: solid 1px #d5d5d5;;
+  border-bottom: solid 1px #d5d5d5;
+  padding: 10px;
 }
 
-.listElement:last-child{
+.listElement:last-child {
   border-bottom: none;
 }
 
-.listElement > div{
+.listElement > div {
   width: 25vw;
-
 }
 
-#todoList{
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+#todoList {
+  box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
   width: 30vw;
 }
