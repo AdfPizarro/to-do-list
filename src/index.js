@@ -11,30 +11,6 @@ class ListElement {
   }
 }
 
-window.onload = () => {
-
-
-  if (localStorage.getItem('todoList') === null) {
-    todoList.push(new ListElement('Do one thing', false, 0));
-    todoList.push(new ListElement('Do another thing', false, 1));
-    todoList.push(new ListElement('Do one last thing', false, 3));
-    localStorage.setItem('todoList', JSON.stringify(todoList));
-
-  } else {
-    todoList = JSON.parse(localStorage.getItem('todoList'));
-  }
-
-  const listContainer = document.getElementById('todoList');
-  listContainer.appendChild(list());
-
-  addListeners();
-};
-
-
-
-
-
-
 function list() {
   const ul = document.createElement('ul');
 
@@ -43,7 +19,7 @@ function list() {
     box.setAttribute('type', 'checkbox');
     box.setAttribute('class', 'checkbox');
     box.setAttribute('id', i);
-    box.checked=todoList[i].completed;
+    box.checked = todoList[i].completed;
 
     const textContainer = document.createElement('div');
     textContainer.textContent = todoList[i].description;
@@ -65,16 +41,30 @@ function list() {
   return ul;
 }
 
-
-function addListeners(){
-  const navButtons = document.querySelectorAll('.checkbox');
-  navButtons.forEach((el) => el.addEventListener('click', (event) => { // eslint-disable-line no-unused-vars
-  console.log(el.id)
-  toggle(el.id)
-}));
-}
-
-function toggle(id){
-  todoList[id].completed=!todoList[id].completed
+function toggle(id) {
+  todoList[id].completed = !todoList[id].completed;
   localStorage.setItem('todoList', JSON.stringify(todoList));
 }
+
+function addListeners() {
+  const navButtons = document.querySelectorAll('.checkbox');
+  navButtons.forEach((el) => el.addEventListener('click', (event) => { // eslint-disable-line no-unused-vars
+    toggle(el.id);
+  }));
+}
+
+window.onload = () => {
+  if (localStorage.getItem('todoList') === null) {
+    todoList.push(new ListElement('Do one thing', false, 0));
+    todoList.push(new ListElement('Do another thing', false, 1));
+    todoList.push(new ListElement('Do one last thing', false, 3));
+    localStorage.setItem('todoList', JSON.stringify(todoList));
+  } else {
+    todoList = JSON.parse(localStorage.getItem('todoList'));
+  }
+
+  const listContainer = document.getElementById('todoList');
+  listContainer.appendChild(list());
+
+  addListeners();
+};
