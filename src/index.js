@@ -47,8 +47,8 @@ function toggle(id) {
 }
 
 function addListeners() {
-  const navButtons = document.querySelectorAll('.checkbox');
-  navButtons.forEach((el) => el.addEventListener('click', (event) => { // eslint-disable-line no-unused-vars
+  const checkBox = document.querySelectorAll('.checkbox');
+  checkBox.forEach((el) => el.addEventListener('click', (event) => {
     toggle(el.id);
   }));
 }
