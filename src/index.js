@@ -48,7 +48,7 @@ function toggle(id) {
 
 function addListeners() {
   const checkBox = document.querySelectorAll('.checkbox');
-  checkBox.forEach((el) => el.addEventListener('click', (event) => {
+  checkBox.forEach((el) => el.addEventListener('click', () => {
     toggle(el.id);
   }));
 }
