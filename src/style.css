@@ -1,0 +1,35 @@
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin: 50px;
+}
+
+.listElement {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid 1px #d5d5d5;
+  padding: 10px;
+}
+
+.listElement:last-child {
+  border-bottom: none;
+}
+
+.listElement > div {
+  width: 25vw;
+}
+
+#todoList {
+  box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
+  width: 30vw;
+}
