@@ -1,6 +1,8 @@
 import _ from 'lodash'; // eslint-disable-line no-unused-vars
 import './style.css';
 
+let todoList = [];
+
 class ListElement {
   constructor(description, completed, index) {
     this.description = description;
@@ -10,17 +12,14 @@ class ListElement {
 }
 
 function list() {
-  const todoList = [];
-
   const ul = document.createElement('ul');
-
-  todoList.push(new ListElement('Do one thing', false, 0));
-  todoList.push(new ListElement('Do another thing', false, 1));
-  todoList.push(new ListElement('Do one last thing', false, 3));
 
   for (let i = 0; i < todoList.length; i++) { // eslint-disable-line no-plusplus
     const box = document.createElement('input');
     box.setAttribute('type', 'checkbox');
+    box.setAttribute('class', 'checkbox');
+    box.setAttribute('id', i);
+    box.checked = todoList[i].completed;
 
     const textContainer = document.createElement('div');
     textContainer.textContent = todoList[i].description;
@@ -39,10 +38,33 @@ function list() {
     ul.append(element);
   }
 
-  // Lodash, now imported by this script
-
   return ul;
 }
 
-const listContainer = document.getElementById('todoList');
-listContainer.appendChild(list());
+function toggle(id) {
+  todoList[id].completed = !todoList[id].completed;
+  localStorage.setItem('todoList', JSON.stringify(todoList));
+}
+
+function addListeners() {
+  const checkBox = document.querySelectorAll('.checkbox');
+  checkBox.forEach((el) => el.addEventListener('click', () => {
+    toggle(el.id);
+  }));
+}
+
+window.onload = () => {
+  if (localStorage.getItem('todoList') === null) {
+    todoList.push(new ListElement('Do one thing', false, 0));
+    todoList.push(new ListElement('Do another thing', false, 1));
+    todoList.push(new ListElement('Do one last thing', false, 3));
+    localStorage.setItem('todoList', JSON.stringify(todoList));
+  } else {
+    todoList = JSON.parse(localStorage.getItem('todoList'));
+  }
+
+  const listContainer = document.getElementById('todoList');
+  listContainer.appendChild(list());
+
+  addListeners();
+};
