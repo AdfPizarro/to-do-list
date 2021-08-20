@@ -1,28 +1,23 @@
 import _ from 'lodash'; // eslint-disable-line no-unused-vars
 import './style.css';
+import List from './list.js';
 
-let todoList = [];
 
-class ListElement {
-  constructor(description, completed, index) {
-    this.description = description;
-    this.completed = completed;
-    this.index = index;
-  }
-}
+let mainList = new List();
+
 
 function list() {
   const ul = document.createElement('ul');
-
-  for (let i = 0; i < todoList.length; i++) { // eslint-disable-line no-plusplus
-    const box = document.createElement('input');
+  const listToDraw=mainList.getTasks();
+  for (let i = 0; i < listToDraw.length; i++) { // eslint-disable-line no-plusplus
+    let box = document.createElement('input');
     box.setAttribute('type', 'checkbox');
     box.setAttribute('class', 'checkbox');
     box.setAttribute('id', i);
-    box.checked = todoList[i].completed;
+    box.checked = listToDraw[i].completed;
 
     const textContainer = document.createElement('div');
-    textContainer.textContent = todoList[i].description;
+    textContainer.textContent = listToDraw[i].description;
 
     const element = document.createElement('li');
 
@@ -41,27 +36,26 @@ function list() {
   return ul;
 }
 
-function toggle(id) {
-  todoList[id].completed = !todoList[id].completed;
-  localStorage.setItem('todoList', JSON.stringify(todoList));
-}
 
-function addListeners() {
+function addBoxListeners() {
   const checkBox = document.querySelectorAll('.checkbox');
   checkBox.forEach((el) => el.addEventListener('click', () => {
-    toggle(el.id);
+    mainList.toggle(el.id);
   }));
 }
 
+function addSaveListener(){
+  const saveButton = document.getElementById('saveButton');
+  saveButton.addEventListener('click', () => {
+    const description=document.getElementById('taskDescription').value;
+    mainList.addTask(description);
+  })
+}
+
 window.onload = () => {
-  if (localStorage.getItem('todoList') === null) {
-    localStorage.setItem('todoList', JSON.stringify(todoList));
-  } else {
-    todoList = JSON.parse(localStorage.getItem('todoList'));
-  }
 
   const listContainer = document.getElementById('todoList');
   listContainer.appendChild(list());
-
-  addListeners();
+  addSaveListener();
+  addBoxListeners();
 };
