@@ -55,9 +55,6 @@ function addListeners() {
 
 window.onload = () => {
   if (localStorage.getItem('todoList') === null) {
-    todoList.push(new ListElement('Do one thing', false, 0));
-    todoList.push(new ListElement('Do another thing', false, 1));
-    todoList.push(new ListElement('Do one last thing', false, 3));
     localStorage.setItem('todoList', JSON.stringify(todoList));
   } else {
     todoList = JSON.parse(localStorage.getItem('todoList'));
