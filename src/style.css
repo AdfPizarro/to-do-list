@@ -8,6 +8,10 @@ ul {
   display: none;
 }
 
+.clear {
+  margin: 20px;
+}
+
 .container {
   display: flex;
   flex-direction: column;

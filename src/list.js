@@ -49,6 +49,12 @@ class List { // eslint-disable-line no-unused-vars
     localStorage.setItem('todoList', JSON.stringify(this.todoList));
   }
 
+  clearCompleted() {
+    const pendingTasks = this.todoList.filter((task) => !task.completed);
+    this.todoList = pendingTasks;
+    localStorage.setItem('todoList', JSON.stringify(this.todoList));
+  }
+
   updateIds() {
     for (let i = 0; i < this.todoList.length; i++) { // eslint-disable-line no-plusplus
       this.todoList[i].index = i + 1;

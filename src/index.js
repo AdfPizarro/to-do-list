@@ -66,6 +66,14 @@ function addSaveListener() {
   });
 }
 
+function addClearListener() {
+  const clear = document.getElementById('clear');
+  clear.addEventListener('click', () => {
+    mainList.clearCompleted();
+    refresh();// eslint-disable-line no-use-before-define
+  });
+}
+
 function addDeleteListeners() {
   const deleteButton = document.querySelectorAll('.fa-trash');
   deleteButton.forEach((el) => el.addEventListener('click', () => {
@@ -119,4 +127,5 @@ window.onload = () => {
   addBoxListeners();
   addDeleteListeners();
   addEditListeners();
+  addClearListener();
 };
