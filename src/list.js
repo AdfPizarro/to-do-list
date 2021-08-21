@@ -40,11 +40,19 @@ class List { // eslint-disable-line no-unused-vars
     let indexToRemove=this.todoList.findIndex(element => element.index === id);
 
     this.todoList.splice(indexToRemove, 1);
+    this.updateIds();
     localStorage.setItem('todoList', JSON.stringify(this.todoList));
   }
 
   toggle(id){
     this.todoList[id].completed = !this.todoList[id].completed;
+    localStorage.setItem('todoList', JSON.stringify(todoList));
+  }
+
+  updateIds(){
+    for (var i = 0; i < this.todoList.length; i++) {
+      this.todoList[i].index=i+1;
+    }
     localStorage.setItem('todoList', JSON.stringify(todoList));
   }
 }
