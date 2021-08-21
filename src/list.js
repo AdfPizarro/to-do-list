@@ -34,8 +34,9 @@ class List { // eslint-disable-line no-unused-vars
     return this.todoList[index-1];
   }
 
-  editTask(id, description){
-
+  updateTask(id, description){
+    this.todoList[id-1].description = description;
+    localStorage.setItem('todoList', JSON.stringify(this.todoList));
   }
 
   removeTask(id){

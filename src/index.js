@@ -94,16 +94,41 @@ function addEditListeners() {
 
     let task=mainList.getTaskInfo(parseInt(el.id.substring(1)));
 
-    document.getElementById('taskFormTitle').innerHTML="Edit Task";
-    document.getElementById('saveButton').innerHTML="Update";
+
+    let updateButton=document.getElementById('updateButton');
+    updateButton.style.display = 'block'
+
+    let form=document.getElementById('form');
+    form.setAttribute('taskNumber', task.index);
+
+    document.getElementById('saveButton').style.display = 'none';
 
 
     document.getElementById('taskDescription').value=task.description;
 
+
     refreshList();
     addDeleteListeners();
     addEditListeners()
+    addUpdateListener()
   }));
+
+}
+
+function addUpdateListener(){
+  const updateButton = document.getElementById('updateButton');
+  updateButton.addEventListener('click', () => {
+    const description=document.getElementById('taskDescription').value;
+    let form=document.getElementById('form');
+    let indexToUpdate=parseInt(form.getAttribute('tasknumber'))
+    console.log(description)
+    mainList.updateTask(indexToUpdate, description);
+    refreshList();
+    addDeleteListeners();
+    addEditListeners()
+    document.getElementById('taskDescription').value="";
+
+  })
 }
 
 window.onload = () => {
