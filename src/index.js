@@ -18,7 +18,7 @@ function refreshList() {
     let box = document.createElement('input');
     box.setAttribute('type', 'checkbox');
     box.setAttribute('class', 'checkbox');
-    box.setAttribute('id', i);
+    box.setAttribute('id', "b"+listToDraw[i].index);
     box.checked = listToDraw[i].completed;
 
     let options = document.createElement('div');
@@ -36,10 +36,12 @@ function refreshList() {
 
     const element = document.createElement('li');
 
-    const drag = document.createElement('i');
-    drag.setAttribute('class', 'fas fa-ellipsis-v');
+    const edit = document.createElement('i');
+    edit.setAttribute('class', 'fas fa-edit');
+    edit.setAttribute('id', 'e'+listToDraw[i].index);
 
-    options.appendChild(drag)
+
+    options.appendChild(edit)
     options.appendChild(trash)
 
     element.setAttribute('class', 'listElement');
@@ -59,7 +61,7 @@ function refreshList() {
 function addBoxListeners() {
   const checkBox = document.querySelectorAll('.checkbox');
   checkBox.forEach((el) => el.addEventListener('click', () => {
-    mainList.toggle(el.id);
+    mainList.toggle(parseInt(el.id.substring(1)));
   }));
 }
 
@@ -70,6 +72,7 @@ function addSaveListener(){
     mainList.addTask(description);
     refreshList();
     addDeleteListeners();
+    addEditListeners()
     document.getElementById('taskDescription').value="";
 
   })
@@ -81,6 +84,25 @@ function addDeleteListeners() {
     mainList.removeTask(parseInt(el.id.substring(1)));
     refreshList();
     addDeleteListeners();
+    addEditListeners()
+  }));
+}
+
+function addEditListeners() {
+  const editButton = document.querySelectorAll('.fa-edit');
+  editButton.forEach((el) => el.addEventListener('click', () => {
+
+    let task=mainList.getTaskInfo(parseInt(el.id.substring(1)));
+
+    document.getElementById('taskFormTitle').innerHTML="Edit Task";
+    document.getElementById('saveButton').innerHTML="Update";
+
+
+    document.getElementById('taskDescription').value=task.description;
+
+    refreshList();
+    addDeleteListeners();
+    addEditListeners()
   }));
 }
 
@@ -90,4 +112,5 @@ window.onload = () => {
   addSaveListener();
   addBoxListeners();
   addDeleteListeners();
+  addEditListeners()
 };

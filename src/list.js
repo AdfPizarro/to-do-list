@@ -30,7 +30,11 @@ class List { // eslint-disable-line no-unused-vars
 
   }
 
-  editTask(){
+  getTaskInfo(index){
+    return this.todoList[index-1];
+  }
+
+  editTask(id, description){
 
   }
 
@@ -45,8 +49,9 @@ class List { // eslint-disable-line no-unused-vars
   }
 
   toggle(id){
-    this.todoList[id].completed = !this.todoList[id].completed;
-    localStorage.setItem('todoList', JSON.stringify(todoList));
+    console.log(id)
+    this.todoList[id-1].completed = !this.todoList[id-1].completed;
+    localStorage.setItem('todoList', JSON.stringify(this.todoList));
   }
 
   updateIds(){
