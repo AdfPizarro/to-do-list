@@ -4,6 +4,14 @@ ul {
   margin: 0;
 }
 
+#updateButton {
+  display: none;
+}
+
+.clear {
+  margin: 20px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -25,11 +33,25 @@ ul {
   border-bottom: none;
 }
 
-.listElement > div {
+.inputs {
   width: 25vw;
 }
 
-#todoList {
+.options {
+  width: 3.5vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form {
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+#todoList,
+.form {
   box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
   width: 30vw;
+  margin-bottom: 30px;
 }
