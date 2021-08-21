@@ -6,7 +6,12 @@ import List from './list.js';
 let mainList = new List();
 
 
-function list() {
+function refreshList() {
+  const listContainer = document.getElementById('todoList');
+  listContainer.innerHTML="";
+
+
+
   const ul = document.createElement('ul');
   const listToDraw=mainList.getTasks();
   for (let i = 0; i < listToDraw.length; i++) { // eslint-disable-line no-plusplus
@@ -33,7 +38,8 @@ function list() {
     ul.append(element);
   }
 
-  return ul;
+  listContainer.appendChild(ul);
+
 }
 
 
@@ -49,13 +55,15 @@ function addSaveListener(){
   saveButton.addEventListener('click', () => {
     const description=document.getElementById('taskDescription').value;
     mainList.addTask(description);
+    refreshList();
+    description.value="";
+
   })
 }
 
 window.onload = () => {
 
-  const listContainer = document.getElementById('todoList');
-  listContainer.appendChild(list());
+  refreshList();
   addSaveListener();
   addBoxListeners();
 };
