@@ -6,5 +6,4 @@ class ListElement {
   }
 }
 
-
-export default ListElement
+export default ListElement;

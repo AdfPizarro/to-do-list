@@ -1,4 +1,4 @@
-import ListElement from './task.js';
+import ListElement from './task';
 
 class List { // eslint-disable-line no-unused-vars
   constructor() {
@@ -10,57 +10,51 @@ class List { // eslint-disable-line no-unused-vars
     }
   }
 
-  addTask(description){
+  addTask(description) {
     let newId;
 
-    if (this.todoList.length===0){
-      newId=1
-    }else{
-      newId=this.todoList[this.todoList.length-1].index+1;
-      console.log(newId)
+    if (this.todoList.length === 0) {
+      newId = 1;
+    } else {
+      newId = this.todoList[this.todoList.length - 1].index + 1;
     }
 
-
-    this.todoList.push(new ListElement(description, false,newId))
+    this.todoList.push(new ListElement(description, false, newId));
     localStorage.setItem('todoList', JSON.stringify(this.todoList));
   }
 
-  getTasks(){
+  getTasks() {
     return this.todoList;
-
   }
 
-  getTaskInfo(index){
-    return this.todoList[index-1];
+  getTaskInfo(index) {
+    return this.todoList[index - 1];
   }
 
-  updateTask(id, description){
-    this.todoList[id-1].description = description;
+  updateTask(id, description) {
+    this.todoList[id - 1].description = description;
     localStorage.setItem('todoList', JSON.stringify(this.todoList));
   }
 
-  removeTask(id){
-
-
-    let indexToRemove=this.todoList.findIndex(element => element.index === id);
+  removeTask(id) {
+    const indexToRemove = this.todoList.findIndex((element) => element.index === id);
 
     this.todoList.splice(indexToRemove, 1);
     this.updateIds();
     localStorage.setItem('todoList', JSON.stringify(this.todoList));
   }
 
-  toggle(id){
-    console.log(id)
-    this.todoList[id-1].completed = !this.todoList[id-1].completed;
+  toggle(id) {
+    this.todoList[id - 1].completed = !this.todoList[id - 1].completed;
     localStorage.setItem('todoList', JSON.stringify(this.todoList));
   }
 
-  updateIds(){
-    for (var i = 0; i < this.todoList.length; i++) {
-      this.todoList[i].index=i+1;
+  updateIds() {
+    for (let i = 0; i < this.todoList.length; i++) { // eslint-disable-line no-plusplus
+      this.todoList[i].index = i + 1;
     }
-    localStorage.setItem('todoList', JSON.stringify(todoList));
+    localStorage.setItem('todoList', JSON.stringify(this.todoList));
   }
 }
 
-export default List
+export default List;
