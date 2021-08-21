@@ -11,20 +11,36 @@ class List { // eslint-disable-line no-unused-vars
   }
 
   addTask(description){
-    this.todoList.push(new ListElement(description, false, this.todoList.length+1))
+    let newId;
+
+    if (this.todoList.length===0){
+      newId=1
+    }else{
+      newId=this.todoList[this.todoList.length-1].index+1;
+      console.log(newId)
+    }
+
+
+    this.todoList.push(new ListElement(description, false,newId))
     localStorage.setItem('todoList', JSON.stringify(this.todoList));
   }
 
   getTasks(){
     return this.todoList;
+
   }
 
   editTask(){
 
   }
 
-  removeTask(){
+  removeTask(id){
 
+
+    let indexToRemove=this.todoList.findIndex(element => element.index === id);
+
+    this.todoList.splice(indexToRemove, 1);
+    localStorage.setItem('todoList', JSON.stringify(this.todoList));
   }
 
   toggle(id){

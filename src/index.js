@@ -21,7 +21,17 @@ function refreshList() {
     box.setAttribute('id', i);
     box.checked = listToDraw[i].completed;
 
+    let options = document.createElement('div');
+    options.setAttribute('class', 'options');
+
+
+    let trash = document.createElement('i');
+    trash.setAttribute('class', 'fas fa-trash');
+    trash.setAttribute('id', 'd'+listToDraw[i].index);
+
+
     const textContainer = document.createElement('div');
+    textContainer.setAttribute('class', 'inputs');
     textContainer.textContent = listToDraw[i].description;
 
     const element = document.createElement('li');
@@ -29,11 +39,14 @@ function refreshList() {
     const drag = document.createElement('i');
     drag.setAttribute('class', 'fas fa-ellipsis-v');
 
+    options.appendChild(drag)
+    options.appendChild(trash)
+
     element.setAttribute('class', 'listElement');
 
     element.appendChild(box);
     element.appendChild(textContainer);
-    element.appendChild(drag);
+    element.appendChild(options);
 
     ul.append(element);
   }
@@ -56,9 +69,19 @@ function addSaveListener(){
     const description=document.getElementById('taskDescription').value;
     mainList.addTask(description);
     refreshList();
-    description.value="";
+    addDeleteListeners();
+    document.getElementById('taskDescription').value="";
 
   })
+}
+
+function addDeleteListeners() {
+  const deleteButton = document.querySelectorAll('.fa-trash');
+  deleteButton.forEach((el) => el.addEventListener('click', () => {
+    mainList.removeTask(parseInt(el.id.substring(1)));
+    refreshList();
+    addDeleteListeners();
+  }));
 }
 
 window.onload = () => {
@@ -66,4 +89,5 @@ window.onload = () => {
   refreshList();
   addSaveListener();
   addBoxListeners();
+  addDeleteListeners();
 };

@@ -25,8 +25,14 @@ ul {
   border-bottom: none;
 }
 
-.listElement > div {
+.inputs {
   width: 25vw;
+}
+
+.options{
+  width: 2vw;
+  display: flex;
+  justify-content: space-between;
 }
 
 .form {
